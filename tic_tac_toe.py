@@ -23,15 +23,45 @@ def print_board(board):
     print(f"C{board[2][0]}|{board[2][1]}|{board[2][2]}")
     print(" 1 2 3")
 
-def place_char_on_board():
-    column_number = user_input[1]
-    row_letter = user_input[0]
-    char_to_index = {'1':0, '2':1, '3':2, 'A':0, 'B':1, 'C':2}
-    column_index = char_to_index[column_number]
-    row_index = char_to_index[row_letter]
-    board[row_index][column_index] = 'x'
-    print_board(board)
+def place_char_on_board(char, user_input):
+        column_number = user_input[1]
+        row_letter = user_input[0]
+        char_to_index = {'1':0, '2':1, '3':2, 'A':0, 'B':1, 'C':2}
+        column_index = char_to_index[column_number]
+        row_index = char_to_index[row_letter]
+        if board[row_index][column_index] == ' ':
+            board[row_index][column_index] = char
+        print_board(board)
 
+def check_for_winner(board):
+    winner = False
+    #first column 
+    if board[0][0] != ' ' and board[0][0] == board[1][0] and board[2][0] == board[0][0]:
+        winner = True
+    #second column
+    if board[0][1] != ' ' and board[0][1] == board[1][1] and board [0][1] == board[1][2]:
+        winner = True
+    #third column
+    if board[0][2] != ' ' and board[0][2] == board[1][2] and board[2][2] == board [0][2]:
+        winner = True
+    #first row
+    if board[0][0] != ' ' and board[0][0] == board[0][1] and board[0][2] == board[0][0]:
+        winner = True
+    #second row
+    if board[1][0] != ' ' and board[1][0] == board[1][1] and board[1][2] == board[1][0]:
+        winner = True
+    #third row
+    if board[2][0] != ' ' and board[2][0] == board[2][1] and board[2][2] == board[2][0]:
+        winner = True
+    #diagonal start top left
+    if board[0][0] != ' ' and board[0][0] == board[1][1] and board[2][2] == board[0][0]:
+        winner = True
+    #diagonal start top right
+    if board[0][2] != ' ' and board[0][2] == board[1][1] and board[2][0] == board[0][2]:
+        winner = True
+    return winner
+
+is_x_turn = True
 #loop until there is a winner
 while winner == False:
     #print board
@@ -40,24 +70,18 @@ while winner == False:
     print('X turn')
     print('Enter row letter followed by column number ex. B1')
     print('Enter q to quit')
+    #get user input
     user_input = input()
+    #do what user says
     if user_input == 'q':
         sys.exit('game over')
     elif user_input != 'q':
-        place_char_on_board()
-        
-    
-    #get user input function
-
-    
-    #do what user says
-    
-
-
-
-    
-    
+        char = 'x' if is_x_turn else 'o'
+        place_char_on_board(char, user_input)
     #evaluate is there a winner 
-
+    winner = check_for_winner(board)
+    is_x_turn = not is_x_turn
+if winner == True:
+    print(f"{char} is the winner")
 # who won
 #add play again 
