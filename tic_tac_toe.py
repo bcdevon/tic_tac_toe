@@ -24,14 +24,14 @@ def print_board(board):
     print(" 1 2 3")
 
 def place_char_on_board(char, user_input):
-        column_number = user_input[1]
-        row_letter = user_input[0]
-        char_to_index = {'1':0, '2':1, '3':2, 'A':0, 'B':1, 'C':2}
-        column_index = char_to_index[column_number]
-        row_index = char_to_index[row_letter]
-        if board[row_index][column_index] == ' ':
-            board[row_index][column_index] = char
-        print_board(board)
+    column_number = user_input[1]
+    row_letter = user_input[0]
+    char_to_index = {'1':0, '2':1, '3':2, 'A':0, 'B':1, 'C':2}
+    column_index = char_to_index[column_number]
+    row_index = char_to_index[row_letter]
+    if board[row_index][column_index] == ' ':
+        board[row_index][column_index] = char
+    print_board(board)
 
 def check_for_winner(board):
     winner = False
@@ -81,7 +81,7 @@ while winner == False:
     #evaluate is there a winner 
     winner = check_for_winner(board)
     is_x_turn = not is_x_turn
+# who won
 if winner == True:
     print(f"{char} is the winner")
-# who won
 #add play again 
