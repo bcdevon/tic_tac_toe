@@ -1,4 +1,6 @@
 import sys
+
+
 #variable for board
 winner = False
 board = [
@@ -29,17 +31,19 @@ def place_char_on_board(char, user_input):
     char_to_index = {'1':0, '2':1, '3':2, 'A':0, 'B':1, 'C':2}
     column_index = char_to_index[column_number]
     row_index = char_to_index[row_letter]
-    if board[row_index][column_index] == ' ':
+    if board[row_index][column_index] != ' ':
+        print(f"Choose a different space {user_input} is taken") 
+    else:
         board[row_index][column_index] = char
-    print_board(board)
-
+        
+    
 def check_for_winner(board):
     winner = False
     #first column 
     if board[0][0] != ' ' and board[0][0] == board[1][0] and board[2][0] == board[0][0]:
         winner = True
     #second column
-    if board[0][1] != ' ' and board[0][1] == board[1][1] and board [0][1] == board[1][2]:
+    if board[0][1] != ' ' and board[0][1] == board[1][1] and board [0][1] == board[2][1]:
         winner = True
     #third column
     if board[0][2] != ' ' and board[0][2] == board[1][2] and board[2][2] == board [0][2]:
@@ -64,10 +68,11 @@ def check_for_winner(board):
 is_x_turn = True
 #loop until there is a winner
 while winner == False:
+    char = 'x' if is_x_turn else 'o'
     #print board
     print_board(board)
     #print controls
-    print('X turn')
+    print(f"{char}'s turn")
     print('Enter row letter followed by column number ex. B1')
     print('Enter q to quit')
     #get user input
@@ -76,7 +81,6 @@ while winner == False:
     if user_input == 'q':
         sys.exit('game over')
     elif user_input != 'q':
-        char = 'x' if is_x_turn else 'o'
         place_char_on_board(char, user_input)
     #evaluate is there a winner 
     winner = check_for_winner(board)
