@@ -26,15 +26,27 @@ def print_board(board):
     print(" 1 2 3")
 
 def place_char_on_board(char, user_input):
-    column_number = user_input[1]
-    row_letter = user_input[0]
-    char_to_index = {'1':0, '2':1, '3':2, 'A':0, 'B':1, 'C':2}
-    column_index = char_to_index[column_number]
-    row_index = char_to_index[row_letter]
-    if board[row_index][column_index] != ' ':
-        print(f"Choose a different space {user_input} is taken") 
-    else:
-        board[row_index][column_index] = char
+    char_list = ['A', 'B', 'C']
+    if user_input[0] not in char_list:
+        print(f"lose a turn {user_input} not on board")
+    if int(user_input[1]) >3:
+        print(f"lose a turn {user_input} not on board") 
+    while int(user_input[1]) <= 3 and user_input[0] in char_list:
+        column_number = user_input[1]
+        row_letter = user_input[0]
+        char_to_index = {'1':0, '2':1, '3':2, 'A':0, 'B':1, 'C':2}
+        column_index = char_to_index[column_number]
+        row_index = char_to_index[row_letter]
+        if board[row_index][column_index] == ' ': 
+            board[row_index][column_index] = char
+            break 
+        elif board[row_index][column_index] != ' ':
+             print(f"lose a turn {user_input} is taken")
+             break
+        
+        
+            
+            
         
     
 def check_for_winner(board):
@@ -88,4 +100,5 @@ while winner == False:
 # who won
 if winner == True:
     print(f"{char} is the winner")
+    print_board(board)
 #add play again 
