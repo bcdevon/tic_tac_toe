@@ -27,10 +27,14 @@ def print_board(board):
 
 def place_char_on_board(char, user_input):
     char_list = ['A', 'B', 'C']
+    #display message if input is not on the board A B C
     if user_input[0] not in char_list:
         print(f"lose a turn {user_input} not on board")
+    #display message if input is not on board 1-3
     if int(user_input[1]) >3:
         print(f"lose a turn {user_input} not on board") 
+    #check for valid input on board space not taken lose a turn if invalid input
+    #place char on board if input is valid
     while int(user_input[1]) <= 3 and user_input[0] in char_list:
         column_number = user_input[1]
         row_letter = user_input[0]
@@ -44,11 +48,7 @@ def place_char_on_board(char, user_input):
              print(f"lose a turn {user_input} is taken")
              break
         
-        
-            
-            
-        
-    
+           
 def check_for_winner(board):
     winner = False
     #first column 
